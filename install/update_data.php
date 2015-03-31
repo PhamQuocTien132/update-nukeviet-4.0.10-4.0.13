@@ -1,16 +1,15 @@
 <?php
 
 /**
- * @Project NUKEVIET 3.x
+ * @Project NUKEVIET 4.x
  * @Author VINADES.,JSC (contact@vinades.vn)
  * @Copyright (C) 2012 VINADES.,JSC. All rights reserved
  * @Createdate 20-03-2015 03:29
  */
 
-if( !defined( 'NV_IS_UPDATE' ) )
-	die( 'Stop!!!' );
+if( !defined( 'NV_IS_UPDATE' ) ) die( 'Stop!!!' );
 
-$nv_update_config = array( );
+$nv_update_config = array();
 
 // Kieu nang cap 1: Update; 2: Upgrade
 $nv_update_config['type'] = 1;
@@ -31,9 +30,9 @@ $nv_update_config['allow_old_version'] = array( "4.0.10" );
 // 0:Nang cap bang tay, 1:Nang cap tu dong, 2:Nang cap nua tu dong
 $nv_update_config['update_auto_type'] = 1;
 
-$nv_update_config['lang'] = array( );
-$nv_update_config['lang']['vi'] = array( );
-$nv_update_config['lang']['en'] = array( );
+$nv_update_config['lang'] = array();
+$nv_update_config['lang']['vi'] = array();
+$nv_update_config['lang']['en'] = array();
 
 // Tiếng Việt
 $nv_update_config['lang']['vi']['nv_up_sysdb'] = 'Cập nhật CSDL hệ thống';
@@ -55,7 +54,7 @@ $nv_update_config['lang']['en']['nv_up_comments'] = 'Update comment database (if
 $nv_update_config['lang']['en']['nv_up_delfiles'] = 'Delete files';
 $nv_update_config['lang']['en']['nv_up_finish'] = 'Update new version';
 
-$nv_update_config['tasklist'] = array( );
+$nv_update_config['tasklist'] = array();
 $nv_update_config['tasklist'][] = array(
 	'r' => '4.0.12',
 	'rq' => 1,
@@ -151,7 +150,7 @@ $nv_update_config['tasklist'][] = array(
  *
  * @return
  */
-function nv_up_sysdb( )
+function nv_up_sysdb()
 {
 	global $nv_update_baseurl, $db, $db_config;
 
@@ -164,7 +163,7 @@ function nv_up_sysdb( )
 		'message' => '',
 	);
 
-	$sqls = array( );
+	$sqls = array();
 
 	// Các cập nhật cho hệ thống không liên quan tới ngôn ngữ
 	$sqls[] = "INSERT INTO " . NV_CONFIG_GLOBALTABLE . " VALUES ('sys', 'global', 'ssl_https', '0')";
@@ -250,11 +249,7 @@ function nv_up_sysdb( )
 		}
 		catch( PDOException $e )
 		{
-			$return['status'] = 0;
-			$return['complete'] = 0;
-			$return['message'] = $e->getMessage( );
-
-			return $return;
+			//$return['message'] = $e->getMessage();
 		}
 	}
 
@@ -267,7 +262,7 @@ function nv_up_sysdb( )
  * @return
  */
 
-function nv_up_bannerdb( )
+function nv_up_bannerdb()
 {
 	global $nv_update_baseurl, $db, $db_config;
 
@@ -279,7 +274,7 @@ function nv_up_bannerdb( )
 		'lang' => 'NO',
 		'message' => '',
 	);
-	$sqls = array( );
+	$sqls = array();
 
 	// Lấy tất cả ngôn ngữ của site
 	$language_query = $db->query( "SELECT lang FROM " . $db_config['prefix'] . "_setup_language WHERE setup = 1" );
@@ -312,11 +307,7 @@ function nv_up_bannerdb( )
 		}
 		catch( PDOException $e )
 		{
-			$return['status'] = 0;
-			$return['complete'] = 0;
-			$return['message'] = $e->getMessage( );
-
-			return $return;
+			//$return['message'] = $e->getMessage();
 		}
 	}
 
@@ -329,7 +320,7 @@ function nv_up_bannerdb( )
  *
  * @return
  */
-function nv_up_pagedb( )
+function nv_up_pagedb()
 {
 	global $nv_update_baseurl, $db, $db_config;
 
@@ -341,7 +332,7 @@ function nv_up_pagedb( )
 		'lang' => 'NO',
 		'message' => '',
 	);
-	$sqls = array( );
+	$sqls = array();
 
 	// Lấy tất cả ngôn ngữ của site
 	$language_query = $db->query( "SELECT lang FROM " . $db_config['prefix'] . "_setup_language WHERE setup = 1" );
@@ -375,11 +366,7 @@ function nv_up_pagedb( )
 		}
 		catch( PDOException $e )
 		{
-			$return['status'] = 0;
-			$return['complete'] = 0;
-			$return['message'] = $e->getMessage( );
-
-			return $return;
+			//$return['message'] = $e->getMessage();
 		}
 	}
 
@@ -392,7 +379,7 @@ function nv_up_pagedb( )
  * @return
  */
 
-function nv_up_contact( )
+function nv_up_contact()
 {
 	global $nv_update_baseurl, $db, $db_config;
 
@@ -404,7 +391,7 @@ function nv_up_contact( )
 		'lang' => 'NO',
 		'message' => '',
 	);
-	$sqls = array( );
+	$sqls = array();
 
 	// Lấy tất cả ngôn ngữ của site
 	$language_query = $db->query( "SELECT lang FROM " . $db_config['prefix'] . "_setup_language WHERE setup = 1" );
@@ -429,7 +416,7 @@ function nv_up_contact( )
 			$sqls[] = "ALTER TABLE " . $db_config['prefix'] . "_" . $lang . "_" . $mod_data . "_department ADD weight SMALLINT(5) NOT NULL AFTER act;";
 
 			$weight = 0;
-			$arr_alias = array( );
+			$arr_alias = array();
 			$cquery = $db->query( "SELECT id, full_name FROM " . $db_config['prefix'] . "_" . $lang . "_" . $mod_data . "_department ORDER BY id ASC" );
 			while( list( $id, $full_name ) = $cquery->fetch( PDO::FETCH_NUM ) )
 			{
@@ -448,12 +435,13 @@ function nv_up_contact( )
 	// Thực hiện truy vấn dữ liệu
 	foreach( $sqls as $sql )
 	{
-		if( !$db->query( $sql ) )
+		try
 		{
-			$return['status'] = 0;
-			$return['complete'] = 0;
-			$return['message'] = '';
-			return $return;
+			$db->query( $sql );
+		}
+		catch( PDOException $e )
+		{
+			//$return['message'] = $e->getMessage();
 		}
 	}
 
@@ -465,7 +453,7 @@ function nv_up_contact( )
  *
  * @return
  */
-function nv_up_comments( )
+function nv_up_comments()
 {
 	global $nv_update_baseurl, $db, $db_config;
 
@@ -477,7 +465,7 @@ function nv_up_comments( )
 		'lang' => 'NO',
 		'message' => '',
 	);
-	$sqls = array( );
+	$sqls = array();
 
 	// Lấy tất cả ngôn ngữ của site
 	$language_query = $db->query( "SELECT lang FROM " . $db_config['prefix'] . "_setup_language WHERE setup = 1" );
@@ -506,11 +494,7 @@ function nv_up_comments( )
 		}
 		catch( PDOException $e )
 		{
-			$return['status'] = 0;
-			$return['complete'] = 0;
-			$return['message'] = $e->getMessage( );
-
-			return $return;
+			//$return['message'] = $e->getMessage();
 		}
 	}
 
@@ -522,7 +506,7 @@ function nv_up_comments( )
  *
  * @return
  */
-function nv_up_users( )
+function nv_up_users()
 {
 	global $nv_update_baseurl, $db, $db_config;
 
@@ -534,15 +518,15 @@ function nv_up_users( )
 		'lang' => 'NO',
 		'message' => '',
 	);
-	$sqls = array( );
+	$sqls = array();
 	$sqls[] = "ALTER TABLE " . $db_config['prefix'] . "_users ADD first_name VARCHAR(100) NULL DEFAULT '' AFTER full_name";
 	$sqls[] = "ALTER TABLE " . $db_config['prefix'] . "_users ADD last_name VARCHAR(100) NULL DEFAULT '' AFTER first_name";
-	$sqls[] = "ALTER TABLE " . $db_config['prefix'] . "_users CHANGE `password` `password` VARCHAR(80) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT ''"; 
+	$sqls[] = "ALTER TABLE " . $db_config['prefix'] . "_users CHANGE `password` `password` VARCHAR(80) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT ''";
 
 
 	$sqls[] = "ALTER TABLE " . $db_config['prefix'] . "_users_reg ADD first_name VARCHAR(100) NULL DEFAULT '' AFTER full_name";
 	$sqls[] = "ALTER TABLE " . $db_config['prefix'] . "_users_reg ADD last_name VARCHAR(100) NULL DEFAULT '' AFTER first_name";
-	$sqls[] = "ALTER TABLE " . $db_config['prefix'] . "_users_reg CHANGE `password` `password` VARCHAR(80) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT ''"; 
+	$sqls[] = "ALTER TABLE " . $db_config['prefix'] . "_users_reg CHANGE `password` `password` VARCHAR(80) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT ''";
 
 	$sqls[] = "UPDATE " . $db_config['prefix'] . "_users SET first_name=full_name where full_name!=''";
 	$sqls[] = "UPDATE " . $db_config['prefix'] . "_users_reg SET first_name=full_name where full_name!=''";
@@ -555,11 +539,7 @@ function nv_up_users( )
 		}
 		catch( PDOException $e )
 		{
-			$return['status'] = 0;
-			$return['complete'] = 0;
-			$return['message'] = $e->getMessage( );
-
-			return $return;
+			//$return['message'] = $e->getMessage();
 		}
 	}
 
@@ -572,7 +552,7 @@ function nv_up_users( )
  * @return
  */
 
-function nv_up_delfiles( )
+function nv_up_delfiles()
 {
 	global $nv_update_baseurl;
 
@@ -620,14 +600,7 @@ function nv_up_delfiles( )
 	@nv_deletefile( NV_ROOTDIR . '/themes/admin_default/modules/themes/package_theme.tpl' );
 	@nv_deletefile( NV_ROOTDIR . '/themes/admin_default/modules/users/import.tpl' );
 
-	@nv_deletefile( NV_ROOTDIR . '/themes/default/blocks/global.banners.tpl' );
-	@nv_deletefile( NV_ROOTDIR . '/themes/default/blocks/global.counter.tpl' );
-	@nv_deletefile( NV_ROOTDIR . '/themes/default/blocks/global.rss.tpl' );
 	@nv_deletefile( NV_ROOTDIR . '/themes/default/images/users/myopenid.gif' );
-
-	@nv_deletefile( NV_ROOTDIR . '/themes/modern/blocks/global.banners.tpl' );
-	@nv_deletefile( NV_ROOTDIR . '/themes/modern/blocks/global.counter.tpl' );
-	@nv_deletefile( NV_ROOTDIR . '/themes/modern/blocks/global.rss.tpl' );
 	@nv_deletefile( NV_ROOTDIR . '/themes/modern/images/users/myopenid.gif' );
 	return $return;
 }
@@ -637,7 +610,7 @@ function nv_up_delfiles( )
  *
  * @return
  */
-function nv_up_finish( )
+function nv_up_finish()
 {
 	global $nv_update_baseurl, $db, $db_config;
 
