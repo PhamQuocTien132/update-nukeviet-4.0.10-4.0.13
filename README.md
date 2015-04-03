@@ -28,7 +28,6 @@ Kiểm tra và chỉnh sửa giao diện:
 Copy lại hai file sau trong giao diện mặc định chuyển sang giao diện của bạn
 
 themes/default/modules/users/info.tpl
-
 themes/default/modules/users/register.tpl
 
 Sửa lại giao diện cho tương thích

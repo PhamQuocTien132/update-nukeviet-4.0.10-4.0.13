@@ -1741,8 +1741,6 @@ elseif( $nv_update_config['step'] == 2 ) // Buoc nang cap: Backup => List cong v
 					die( $e->getMessage( ) );
 				}
 
-				$db->query( "UPDATE " . NV_CONFIG_GLOBALTABLE . " SET config_value = '4.0.12' WHERE lang = 'sys' AND module = 'global' AND config_name = 'version'" );
-				
 				try
 				{
 					$db->query( "ALTER TABLE " . NV_SESSIONS_GLOBALTABLE . " CHANGE `full_name` `username` VARCHAR(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;" );
