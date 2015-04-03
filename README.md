@@ -7,7 +7,7 @@ Backup toàn bộ site và CSDL.
 Đăng nhập admin, vào cấu hình => cấu hình chung, tại chỗ kích hoạt chức năng tối ưu site chọn "không kích hoạt".
 
 # Bước 2
-Kiểm tra thư mục install trên website có tồn tại không, nếu không tồn tại, upload lại thư mục này từ bản cài đặt NukeViet 4.0.12.
+Kiểm tra thư mục install trên website có tồn tại không, nếu không tồn tại, upload lại thư mục này từ bản cài đặt NukeViet 4.0.13.
 
 # Bước 3
 Download file thư mục install về giải nén và upload các thư mục giải nén được lên website.
@@ -28,6 +28,9 @@ Kiểm tra và chỉnh sửa giao diện:
 Copy lại hai file sau trong giao diện mặc định chuyển sang giao diện của bạn
 
 themes/default/modules/users/info.tpl
+
 themes/default/modules/users/register.tpl
 
-Sửa lại giao diện cho tương thích
+Kiểm tra và ửa lại giao diện cho tương thích.
+
+Các lỗi trong quá trình nâng cấp vui lòng thảo luận tại diễn đàn NukeViet: http://forum.nukeviet.vn/viewtopic.php?f=171&t=35166
