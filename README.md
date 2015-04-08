@@ -31,6 +31,34 @@ themes/default/modules/users/info.tpl
 
 themes/default/modules/users/register.tpl
 
+# Bước 7
+
+Thay lại đoạn code Breadcrumbs trong file /install/update/themes/default/theme.php thành đoạn code như sau
+```
+		// Breadcrumbs
+		if( $home != 1 )
+		{
+			if( $global_config['rewrite_op_mod'] != $module_name )
+			{
+				$arr_cat_title_i = array(
+					'catid' => 0,
+					'title' => $module_info['custom_title'],
+					'link' => NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&amp;' . NV_NAME_VARIABLE . '=' . $module_name
+				);
+				array_unshift( $array_mod_title, $arr_cat_title_i );
+			}
+			if( ! empty( $array_mod_title ) )
+			{
+				foreach( $array_mod_title as $arr_cat_title_i )
+				{
+					$xtpl->assign( 'BREADCRUMBS', $arr_cat_title_i );
+					$xtpl->parse( 'main.breadcrumbs.loop' );
+				}
+				$xtpl->parse( 'main.breadcrumbs' );
+			}
+		}
+```
+
 Kiểm tra và ửa lại giao diện cho tương thích.
 
 Các lỗi trong quá trình nâng cấp vui lòng thảo luận tại diễn đàn NukeViet: http://forum.nukeviet.vn/viewtopic.php?f=171&t=35166

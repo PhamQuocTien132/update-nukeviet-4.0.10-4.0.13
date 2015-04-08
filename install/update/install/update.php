@@ -1721,7 +1721,7 @@ elseif( $nv_update_config['step'] == 2 ) // Buoc nang cap: Backup => List cong v
 					$nv_update_config['updatelog']['substep'] = 4;
 					$NvUpdate->set_data_log( $nv_update_config['updatelog'] );
 				}
-				
+
 				try
 				{
 					$admin_cookie = $nv_Request->get_string( 'admin', 'session' );
@@ -1744,14 +1744,37 @@ elseif( $nv_update_config['step'] == 2 ) // Buoc nang cap: Backup => List cong v
 				try
 				{
 					$db->query( "ALTER TABLE " . NV_SESSIONS_GLOBALTABLE . " CHANGE `full_name` `username` VARCHAR(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;" );
+				}
+				catch( PDOException $e )
+				{
+					//die( $e->getMessage( ) );
+				}
 
+				try
+				{
 					$db->query( "DROP TABLE " . $db_config['prefix'] . "_setup_modules" );
+				}
+				catch( PDOException $e )
+				{
+					//die( $e->getMessage( ) );
+				}
+
+				try
+				{
 					$db->query( "ALTER TABLE " . $db_config['prefix'] . "_users DROP full_name" );
+				}
+				catch( PDOException $e )
+				{
+					//die( $e->getMessage( ) );
+				}
+
+				try
+				{
 					$db->query( "ALTER TABLE " . $db_config['prefix'] . "_users_reg DROP full_name" );
 				}
 				catch( PDOException $e )
 				{
-					die( $e->getMessage( ) );
+					//die( $e->getMessage( ) );
 				}
 
 				die( 'OK' );
@@ -1947,7 +1970,7 @@ elseif( $nv_update_config['step'] == 3 ) // Hoan tat nang cap
 		Header( 'Location:' . NV_BASE_SITEURL . 'install/update.php?step=3' );
 		exit( );
 	}
-	
+
 	$array = array();
 
 	// Lay thong tin phien ban va module

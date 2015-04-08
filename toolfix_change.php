@@ -10,19 +10,19 @@ if( file_exists( NV_ROOTDIR . '/themes/' . $fixthemes ) )
 	{
 		rename( NV_ROOTDIR . '/themes/' . $fixthemes . '/blocks/global.banners.tpl', NV_ROOTDIR . '/themes/' . $fixthemes . '/modules/banners/global.banners.tpl' );
 	}
-	
+
 	if( file_exists( NV_ROOTDIR . '/themes/' . $fixthemes . '/blocks/global.counter.tpl' ) )
 	{
 		rename( NV_ROOTDIR . '/themes/' . $fixthemes . '/blocks/global.counter.tpl', NV_ROOTDIR . '/themes/' . $fixthemes . '/modules/statistics/global.counter.tpl' );
 	}
-	
+
 	if( file_exists( NV_ROOTDIR . '/themes/' . $fixthemes . '/blocks/global.rss.tpl' ) )
 	{
 		mkdir( NV_ROOTDIR . '/themes/' . $fixthemes . '/modules/feeds' );
 		file_put_contents( NV_ROOTDIR . '/themes/' . $fixthemes . '/modules/feeds/index.html', '' );
 		rename( NV_ROOTDIR . '/themes/' . $fixthemes . '/blocks/global.rss.tpl', NV_ROOTDIR . '/themes/' . $fixthemes . '/modules/feeds/global.rss.tpl' );
 	}
-	
+
 	// fixcol
 	function dir_tree_pack_tpl( $dir )
 	{
@@ -52,16 +52,16 @@ if( file_exists( NV_ROOTDIR . '/themes/' . $fixthemes ) )
 							$stack[] = $current_file;
 						}
 					}
-	
+
 					$i++;
 				}
 			}
 		}
 		return $res;
 	}
-	
-	
-	
+
+
+
 	$content_bootstrap = file_get_contents( NV_ROOTDIR . '/themes/' . $fixthemes . '/css/bootstrap.css' );
 	if( strpos($content_bootstrap, '.col-xs-12') > 0 AND strpos($content_bootstrap, '.col-xs-24') === false )
 	{
@@ -76,22 +76,22 @@ if( file_exists( NV_ROOTDIR . '/themes/' . $fixthemes ) )
 				$content = preg_replace( '/([\\s|\'\"])col\-sm\-' . $i . '([\\s|\'\"])/', "\\1col-sm-" . ($i * 2) . "\\2", $content );
 				$content = preg_replace( '/([\\s|\'\"])col\-md\-' . $i . '([\\s|\'\"])/', "\\1col-md-" . ($i * 2) . "\\2", $content );
 				$content = preg_replace( '/([\\s|\'\"])col\-lg\-' . $i . '([\\s|\'\"])/', "\\1col-lg-" . ($i * 2) . "\\2", $content );
-		
+
 				$content = preg_replace( '/([\\s|\'\"])col\-xs\-push\-' . $i . '([\\s|\'\"])/', "\\1col-xs-push-" . ($i * 2) . "\\2", $content );
 				$content = preg_replace( '/([\\s|\'\"])col\-sm\-push\-' . $i . '([\\s|\'\"])/', "\\1col-sm-push-" . ($i * 2) . "\\2", $content );
 				$content = preg_replace( '/([\\s|\'\"])col\-md\-push\-' . $i . '([\\s|\'\"])/', "\\1col-md-push-" . ($i * 2) . "\\2", $content );
 				$content = preg_replace( '/([\\s|\'\"])col\-lg\-push\-' . $i . '([\\s|\'\"])/', "\\1col-lg-push-" . ($i * 2) . "\\2", $content );
-		
+
 				$content = preg_replace( '/([\\s|\'\"])col\-xs\-pull\-' . $i . '([\\s|\'\"])/', "\\1col-xs-pull-" . ($i * 2) . "\\2", $content );
 				$content = preg_replace( '/([\\s|\'\"])col\-sm\-pull\-' . $i . '([\\s|\'\"])/', "\\1col-sm-pull-" . ($i * 2) . "\\2", $content );
 				$content = preg_replace( '/([\\s|\'\"])col\-md\-pull\-' . $i . '([\\s|\'\"])/', "\\1col-md-pull-" . ($i * 2) . "\\2", $content );
 				$content = preg_replace( '/([\\s|\'\"])col\-lg\-pull\-' . $i . '([\\s|\'\"])/', "\\1col-lg-pull-" . ($i * 2) . "\\2", $content );
-		
+
 				$content = preg_replace( '/([\\s|\'\"])col\-xs\-offset\-' . $i . '([\\s|\'\"])/', "\\1col-xs-offset-" . ($i * 2) . "\\2", $content );
 				$content = preg_replace( '/([\\s|\'\"])col\-sm\-offset\-' . $i . '([\\s|\'\"])/', "\\1col-sm-offset-" . ($i * 2) . "\\2", $content );
 				$content = preg_replace( '/([\\s|\'\"])col\-md\-offset\-' . $i . '([\\s|\'\"])/', "\\1col-md-offset-" . ($i * 2) . "\\2", $content );
 				$content = preg_replace( '/([\\s|\'\"])col\-lg\-offset\-' . $i . '([\\s|\'\"])/', "\\1col-lg-offset-" . ($i * 2) . "\\2", $content );
-		
+
 			}
 			$content = rtrim( $content );
 			if( $content != $content_old )
@@ -100,49 +100,49 @@ if( file_exists( NV_ROOTDIR . '/themes/' . $fixthemes ) )
 				echo 'ok:fix col---' . $file_i . '<br>';
 			}
 		}
-	
+
 		// Thay thế thư viện bootstrap lên 24 cột
 		if( !file_exists( NV_ROOTDIR . '/themes/' . $fixthemes . '/config.json' ) )
 		{
 			nv_copyfile( NV_ROOTDIR . '/themes/default/config.json', NV_ROOTDIR . '/themes/' . $fixthemes . '/config.json' );
-		
+
 			rename( NV_ROOTDIR . '/themes/' . $fixthemes . '/css/bootstrap-theme.css', NV_ROOTDIR . '/themes/' . $fixthemes . '/css/bootstrap-theme.css.' . NV_CURRENTTIME );
 			rename( NV_ROOTDIR . '/themes/' . $fixthemes . '/css/bootstrap-theme.min.css', NV_ROOTDIR . '/themes/' . $fixthemes . '/css/bootstrap-theme.min.css.' . NV_CURRENTTIME );
 			rename( NV_ROOTDIR . '/themes/' . $fixthemes . '/css/bootstrap.css', NV_ROOTDIR . '/themes/' . $fixthemes . '/css/bootstrap.css.' . NV_CURRENTTIME );
 			rename( NV_ROOTDIR . '/themes/' . $fixthemes . '/css/bootstrap.min.css', NV_ROOTDIR . '/themes/' . $fixthemes . '/css/bootstrap.min.css.' . NV_CURRENTTIME );
-		
+
 			rename( NV_ROOTDIR . '/themes/' . $fixthemes . '/js/bootstrap.js', NV_ROOTDIR . '/themes/' . $fixthemes . '/js/bootstrap.js.' . NV_CURRENTTIME );
 			rename( NV_ROOTDIR . '/themes/' . $fixthemes . '/js/bootstrap.min.js', NV_ROOTDIR . '/themes/' . $fixthemes . '/js/bootstrap.min.js.' . NV_CURRENTTIME );
-		
+
 			copy( NV_ROOTDIR . '/themes/default/css/bootstrap-theme.css', NV_ROOTDIR . '/themes/' . $fixthemes . '/css/bootstrap-theme.css' );
 			copy( NV_ROOTDIR . '/themes/default/css/bootstrap-theme.min.css', NV_ROOTDIR . '/themes/' . $fixthemes . '/css/bootstrap-theme.min.css' );
 			copy( NV_ROOTDIR . '/themes/default/css/bootstrap.css', NV_ROOTDIR . '/themes/' . $fixthemes . '/css/bootstrap.css' );
 			copy( NV_ROOTDIR . '/themes/default/css/bootstrap.min.css', NV_ROOTDIR . '/themes/' . $fixthemes . '/css/bootstrap.min.css' );
-		
+
 			copy( NV_ROOTDIR . '/themes/default/js/bootstrap.js', NV_ROOTDIR . '/themes/' . $fixthemes . '/js/bootstrap.js' );
 			copy( NV_ROOTDIR . '/themes/default/js/bootstrap.min.js', NV_ROOTDIR . '/themes/' . $fixthemes . '/js/bootstrap.min.js' );
 		}
 	}
-	
+
 	// Xoa va copy them cac file anh
 	if( file_exists( NV_ROOTDIR . '/themes/' . $fixthemes . '/images/users/myopenid.gif' ) )
 	{
 		unlink( NV_ROOTDIR . '/themes/' . $fixthemes . '/images/users/myopenid.gif' );
 		copy( NV_ROOTDIR . '/themes/default/images/users/single-sign-on.gif', NV_ROOTDIR . '/themes/' . $fixthemes . '/images/users/single-sign-on.gif' );
 	}
-	
+
 	// copy them file tpl cua module page
 	if( !file_exists( NV_ROOTDIR . '/themes/' . $fixthemes . '/modules/page/block.page_list.tpl' ) )
 	{
 		copy( NV_ROOTDIR . '/themes/default/modules/page/block.page_list.tpl', NV_ROOTDIR . '/themes/' . $fixthemes . '/modules/page/block.page_list.tpl' );
 	}
-	
+
 	// copy them file tpl cua module page
 	if( !file_exists( NV_ROOTDIR . '/themes/' . $fixthemes . '/modules/comment/block_new_comment.tpl' ) )
 	{
 		copy( NV_ROOTDIR . '/themes/default/modules/comment/block_new_comment.tpl', NV_ROOTDIR . '/themes/' . $fixthemes . '/modules/comment/block_new_comment.tpl' );
 	}
-	
+
 	// hàm fix
 	function toolfix_change( $fixthemes, $file_i, $begin, $end, $contentnews )
 	{
@@ -156,7 +156,7 @@ if( file_exists( NV_ROOTDIR . '/themes/' . $fixthemes ) )
 		}
 		return FALSE;
 	}
-	
+
 	//
 	//module banner
 	// file:modules\banners\addads.tpl
@@ -173,17 +173,17 @@ if( file_exists( NV_ROOTDIR . '/themes/' . $fixthemes ) )
 	</ul>
 	';
 	$e = toolfix_change( $fixthemes, $file_i, $begin, $end, $contentnews );
-	
+
 	if( $e )
 	{
 		echo "ok---" . $file_i . '<br>';
-	
+
 	}
 	else
 	{
 		echo("Lỗi " . $file_i . "<br>");
 	}
-	
+
 	//file:modules\banners\clinfo.tpl
 	$file_i = "modules/banners/clinfo.tpl";
 	$begin = '<!-- BEGIN: management -->';
@@ -201,13 +201,13 @@ if( file_exists( NV_ROOTDIR . '/themes/' . $fixthemes ) )
 	if( $e )
 	{
 		echo "ok---" . $file_i . '<br>';
-	
+
 	}
 	else
 	{
 		echo("Lỗi " . $file_i . "<br>");
 	}
-	
+
 	// file: modules\banners\home.tpl
 	$file_i = "modules/banners/home.tpl";
 	$begin = '<!-- BEGIN: management -->';
@@ -225,13 +225,13 @@ if( file_exists( NV_ROOTDIR . '/themes/' . $fixthemes ) )
 	if( $e )
 	{
 		echo "ok---" . $file_i . '<br>';
-	
+
 	}
 	else
 	{
 		echo("Lỗi " . $file_i . "<br>");
 	}
-	
+
 	//file:modules\banners\stats.tpl
 	$file_i = "modules/banners/stats.tpl";
 	$begin = '<!-- BEGIN: management -->';
@@ -246,20 +246,20 @@ if( file_exists( NV_ROOTDIR . '/themes/' . $fixthemes ) )
 	</ul>
 	';
 	$e = toolfix_change( $fixthemes, $file_i, $begin, $end, $contentnews );
-	
+
 	if( $e )
 	{
 		echo "ok---" . $file_i . '<br>';
-	
+
 	}
 	else
 	{
 		echo("Lỗi " . $file_i . "<br>");
 	}
-	
+
 	//module contact
 	//file:modules\contact\block.department.tpl
-	
+
 	$file_i = "modules/contact/block.department.tpl";
 	if( file_exists( NV_ROOTDIR . '/themes/' . $fixthemes . '/' . $file_i ) )
 	{
@@ -275,13 +275,9 @@ if( file_exists( NV_ROOTDIR . '/themes/' . $fixthemes ) )
 				file_put_contents( NV_ROOTDIR . '/themes/' . $fixthemes . '/' . $file_i, $content_replace, LOCK_EX );
 				echo "ok---" . $file_i . '<br>';
 			}
-			else
-			{
-				echo("Lỗi " . $file_i . "<br>");
-			}
 		}
 	}
-	
+
 	//module download
 	//file:/modules/download/viewfile.tpl
 	$file_i = "modules/download/viewfile.tpl";
@@ -294,16 +290,16 @@ if( file_exists( NV_ROOTDIR . '/themes/' . $fixthemes ) )
 	if( $e )
 	{
 		echo "ok---" . $file_i . '<br>';
-	
+
 	}
 	else
 	{
 		echo("Lỗi " . $file_i . "<br>");
 	}
-	
+
 	//module menu
 	//file:modules\menu\global.bootstrap.tpl
-	
+
 	$file_i = "modules/menu/global.bootstrap.tpl";
 	$add = '<!-- BEGIN: submenu -->
 	<ul class="dropdown-menu">
@@ -339,11 +335,11 @@ if( file_exists( NV_ROOTDIR . '/themes/' . $fixthemes ) )
 	{
 		echo("Lỗi " . $file_i . "<br>");
 	}
-	
+
 	//module news
 	//File:modules/news/detail.tpl
 	$file_i = "modules/news/detail.tpl";
-	
+
 	$begin = '<!-- BEGIN: comment -->';
 	$end = '<!-- END: comment -->';
 	$contentnews = '
@@ -353,13 +349,13 @@ if( file_exists( NV_ROOTDIR . '/themes/' . $fixthemes ) )
 	if( $e )
 	{
 		echo "ok---" . $file_i . '<br>';
-	
+
 	}
 	else
 	{
 		echo("Lỗi " . $file_i . "<br>");
 	}
-	
+
 	//File:modules/news/viewcat_list.tpl
 	$file_i = "modules/news/viewcat_list.tpl";
 	$search = '<a class="show" href="{OTHER.link}" data-content="{CONTENT.hometext}" data-img="{CONTENT.imghome}" data-rel="tooltip">{CONTENT.title}';
@@ -377,7 +373,7 @@ if( file_exists( NV_ROOTDIR . '/themes/' . $fixthemes ) )
 	{
 		echo("Lỗi " . $file_i . "<br>");
 	}
-	
+
 	// module page
 	//file:modules/page/main_list.tpl
 	$file_i = "modules/page/main_list.tpl";
@@ -386,7 +382,7 @@ if( file_exists( NV_ROOTDIR . '/themes/' . $fixthemes ) )
 	<div class="text-center">{GENERATE_PAGE}</div>';
 	$content_old = file_get_contents( NV_ROOTDIR . '/themes/' . $fixthemes . '/' . $file_i );
 	$new = preg_replace( '#' . $search . '#s', $add, $content_old );
-	
+
 	if( $new != $content_old )
 	{
 		file_put_contents( NV_ROOTDIR . '/themes/' . $fixthemes . '/' . $file_i, $new, LOCK_EX );
@@ -396,7 +392,7 @@ if( file_exists( NV_ROOTDIR . '/themes/' . $fixthemes ) )
 	{
 		echo("Lỗi " . $file_i . "<br>");
 	}
-	
+
 	//module user
 	//file:modules\users\info.tpl
 	$file_i = "modules/users/info.tpl";
@@ -419,11 +415,11 @@ if( file_exists( NV_ROOTDIR . '/themes/' . $fixthemes ) )
 	<input type="text" class="form-control required" name="last_name" value="{DATA.last_name}" id="last_name" maxlength="100"  placeholder="{LANG.last_name}"/>
 	</div>
 	</div>
-	
+
 	';
 	$content_old = file_get_contents( NV_ROOTDIR . '/themes/' . $fixthemes . '/' . $file_i );
 	$new = preg_replace( '#' . $search . '#s', $add, $content_old );
-	
+
 	if( $new != $content_old )
 	{
 		file_put_contents( NV_ROOTDIR . '/themes/' . $fixthemes . '/' . $file_i, $new, LOCK_EX );
@@ -433,7 +429,7 @@ if( file_exists( NV_ROOTDIR . '/themes/' . $fixthemes ) )
 	{
 		echo("Lỗi " . $file_i . "<br>");
 	}
-	
+
 	//file:\modules\users\register.tpl
 	$file_i = "modules/users/register.tpl";
 	$search = '<div class="form-group">
@@ -459,7 +455,7 @@ if( file_exists( NV_ROOTDIR . '/themes/' . $fixthemes ) )
 	';
 	$content_old = file_get_contents( NV_ROOTDIR . '/themes/' . $fixthemes . '/' . $file_i );
 	$new = preg_replace( '#' . $search . '#s', $add, $content_old );
-	
+
 	if( $new != $content_old )
 	{
 		file_put_contents( NV_ROOTDIR . '/themes/' . $fixthemes . '/' . $file_i, $new, LOCK_EX );
@@ -469,21 +465,21 @@ if( file_exists( NV_ROOTDIR . '/themes/' . $fixthemes ) )
 	{
 		echo("Lỗi " . $file_i . "<br>");
 	}
-	
+
 	//file:modules\users\openid_administrator.tpl
 	$file_i = "modules/users/openid_administrator.tpl";
 	if( file_exists( NV_ROOTDIR . '/themes/' . $fixthemes . '/' . $file_i ) )
 	{
 		$begin = '<!-- BEGIN: openid_list -->';
 		$end = '<!-- END: openid_list -->';
-	
+
 		$content_old = file_get_contents( NV_ROOTDIR . '/themes/' . $fixthemes . '/' . $file_i );
 		if( preg_match( '#' . $begin . '(.*)' . $end . '#s', $content_old, $arr ) )
 		{
 			$openid_i = str_replace( '{OPENID_LIST.server}', '{OPENID_LIST.openid}', $arr[1] );
 			$openid_i = str_replace( '<a href="javascript:void(0);" title="{OPENID_LIST.openid}">{OPENID_LIST.openid}</a>', '{OPENID_LIST.openid}', $openid_i );
 			$content_replace = str_replace( $arr[1], $openid_i, $content_old );
-	
+
 			if( $content_replace != $content_old )
 			{
 				file_put_contents( NV_ROOTDIR . '/themes/' . $fixthemes . '/' . $file_i, $content_replace, LOCK_EX );
