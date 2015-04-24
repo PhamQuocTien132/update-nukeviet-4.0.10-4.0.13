@@ -33,7 +33,7 @@ themes/default/modules/users/register.tpl
 
 # Bước 7
 
-Thay lại đoạn code Breadcrumbs trong file /install/update/themes/default/theme.php thành đoạn code như sau
+Thay lại đoạn code Breadcrumbs trong file /themes/default/theme.php thành đoạn code như sau
 ```
 		// Breadcrumbs
 		if( $home != 1 )
@@ -59,6 +59,6 @@ Thay lại đoạn code Breadcrumbs trong file /install/update/themes/default/th
 		}
 ```
 
-Kiểm tra và ửa lại giao diện cho tương thích.
+Kiểm tra và sửa lại giao diện cho tương thích.
 
 Các lỗi trong quá trình nâng cấp vui lòng thảo luận tại diễn đàn NukeViet: http://forum.nukeviet.vn/viewtopic.php?f=171&t=35166
